@@ -1,3 +1,4 @@
+//シートIDからシート名を取得
 function wmap_getSheetId(sheet_name) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheet_name);
   var tmp = sheet.getSheetId();
@@ -31,4 +32,38 @@ function wmap_getSpreadsheetURL(){
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var ss_url = ss.getUrl();
   return ss_url;
+}
+
+//表示されているシート名をすべて取得
+function wmap_getSheetsName_NonHidden(){
+  var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
+  var sheet_names = new Array();
+  
+  if (sheets.length >= 1) {  
+    for(var i = 0;i < sheets.length; i++)
+    {
+      if(!sheets[i].isSheetHidden())
+      {
+        sheet_names.push(sheets[i].getName());
+      }
+    }
+  }
+  return sheet_names;
+}
+
+//非表示のシート名をすべて取得
+function wmap_getSheetsName_Hidden(){
+  var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
+  var sheet_names = new Array();
+  
+  if (sheets.length >= 1) {  
+    for(var i = 0;i < sheets.length; i++)
+    {
+      if(sheets[i].isSheetHidden())
+      {
+        sheet_names.push(sheets[i].getName());
+      }
+    }
+  }
+  return sheet_names;
 }
